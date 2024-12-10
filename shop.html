@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPals - Premium Pet Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --primary-dark: #4338ca;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --background: #f8fafc;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+            --success: #22c55e;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-logo i {
+            font-size: 1.8rem;
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style-type: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .navbar-menu a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Enhanced Hero Section */
+        .shop-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 8rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shop-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/1200/400') center/cover;
+            opacity: 0.1;
+        }
+
+        .shop-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .shop-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Enhanced Categories */
+        .shop-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .shop-category {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .shop-category:hover {
+            background-color: var(--white);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .product-rating {
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .product-rating span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background-color: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Shopping Cart */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background-color: var(--white);
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1001;
+            padding: 2rem;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        .cart-items {
+            max-height: calc(100vh - 250px);
+            overflow-y: auto;
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--background);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            background-color: var(--background);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .cart-total {
+            margin-top: auto;
+            border-top: 2px solid var(--background);
+            padding-top: 1rem;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1002;
+        }
+
+        .toast {
+            background-color: var(--white);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast-success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast-error {
+            border-left: 4px solid var(--error);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-menu {
+                display: none;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .shop-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--text-light);
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Tooltip Styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--text);
+            color: var(--white);
+            text-align: center;
+            border-radius: 6px;
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-logo">
+                <i class="fas fa-paw"></i>
+                PetPals
+            </a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <a href="#" class="cart-icon" id="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="shop-hero">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">PetPals Premium Shop</h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">
+                Discover premium products for your furry friends, carefully curated for their happiness and well-being
+            </p>
+            <div class="shop-categories animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="#" class="shop-category" data-category="dogs">
+                    <i class="fas fa-dog"></i> Dogs
+                </a>
+                <a href="#" class="shop-category" data-category="cats">
+                    <i class="fas fa-cat"></i> Cats
+                </a>
+                <a href="#" class="shop-category" data-category="fish">
+                    <i class="fas fa-fish"></i> Fish
+                </a>
+                <a href="#" class="shop-category" data-category="birds">
+                    <i class="fas fa-dove"></i> Birds
+                </a>
+                <a href="#" class="shop-category" data-category="small-pets">
+                    <i class="fas fa-rabbit"></i> Small Pets
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="product-grid">
+    
+            <!-- Product Card 1 -->
+            <article class="product-card">
+                <span class="product-badge">Best Seller</span>
+                <img src="pexels-mathew-coulton-2358287-4432260.jpg" alt="Premium Dog Food" class="product-image">
+                <div class="product-info">
+                    <div class="product-category">Dogs • Food</div>
+                    <h3 class="product-title">Premium Dog Food</h3>
+                    <p class="product-description">High-quality, nutritious dog food made with real ingredients.</p>
+                    <div class="product-meta">
+                        <div class="product-price">$29.99</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(128)</span>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-id="1">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+    
+            <!-- Product Card 2 -->
+            <article class="product-card">
+                <img src="OIP (12).jpg" alt="Cat Scratching Post" class="product-image">
+                <div class="product-info">
+                    <div class="product-category">Cats • Accessories</div>
+                    <h3 class="product-title">Cat Scratching Post</h3>
+                    <p class="product-description">Durable scratching post to keep your cat entertained and happy.</p>
+                    <div class="product-meta">
+                        <div class="product-price">$39.99</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(89)</span>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-id="2">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+    
+            <!-- Product Card 3 -->
+            <article class="product-card">
+                <img src="easy-homemade-bird-cage-cleaner-390334-05-16371d48e62f4746afd711953e8c957d.jpg" alt="Bird Cage Cleaner" class="product-image">
+                <div class="product-info">
+                    <div class="product-category">Birds • Accessories</div>
+                    <h3 class="product-title">Bird Cage Cleaner</h3>
+                    <p class="product-description">Safe and effective cage cleaner for healthy and happy birds.</p>
+                    <div class="product-meta">
+                        <div class="product-price">$14.99</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                            <span>(45)</span>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-id="3">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+    
+            <!-- Product Card 4 -->
+            <article class="product-card">
+                <img src="OIP (13).jpg" alt="Fish Tank Decoration" class="product-image">
+                <div class="product-info">
+                    <div class="product-category">Fish • Decoration</div>
+                    <h3 class="product-title">Fish Tank Decoration</h3>
+                    <p class="product-description">Beautiful decoration to enhance the look of your aquarium.</p>
+                    <div class="product-meta">
+                        <div class="product-price">$19.99</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(27)</span>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-id="4">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+    
+            <!-- Product Card 5 -->
+            <article class="product-card">
+                <img src="OIP (15).jpg" alt="Rabbit Hay Feeder" class="product-image">
+                <div class="product-info">
+                    <div class="product-category">Rabbits • Accessories</div>
+                    <h3 class="product-title">Rabbit Hay Feeder</h3>
+                    <p class="product-description">Keep your rabbit's hay fresh and organized with this feeder.</p>
+                    <div class="product-meta">
+                        <div class="product-price">$24.99</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(32)</span>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary add-to-cart" data-id="5">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+    
+        </section>
+    </main>
+
+    <div id="newsletter-modal" class="modal">
+        <div class="modal-content">
+            <h2>Subscribe to PetPals Newsletter</h2>
+            <p>Get exclusive deals and pet care tips delivered to your inbox!</p>
+            <form id="newsletter-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Pet Interests</label>
+                    <div>
+                        <input type="checkbox" id="dogs-interest" name="interests" value="dogs">
+                        <label for="dogs-interest">Dogs</label>
+                        <input type="checkbox" id="cats-interest" name="interests" value="cats">
+                        <label for="cats-interest">Cats</label>
+                        <!-- Add more pet interests -->
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    
+
+    <!-- Shopping Cart Sidebar -->
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button class="cart-close" id="cart-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-total">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">$0.00</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Shipping</span>
+                <span>Free</span>
+            </div>
+            <div class="cart-total-row">
+                <strong>Total</strong>
+                <strong id="cart-total">$0.00</strong>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                Checkout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script>
+        // Product data
+        const products = [
+        {
+            id: 1,
+            name: "Premium Dog Food",
+            price: 29.99,
+            image: "pexels-mathew-coulton-2358287-4432260.jpg",
+            category: "dogs"
+        },
+        {
+            id: 2,
+            name: "Cat Scratching Post",
+            price: 39.99,
+            image: "OIP (12).jpg",
+            category: "cats"
+        },
+        {
+            id: 3,
+            name: "Bird Cage Cleaner",
+            price: 14.99,
+            image: "easy-homemade-bird-cage-cleaner-390334-05-16371d48e62f4746afd711953e8c957d.jpg",
+            category: "birds"
+        },
+        {
+            id: 4,
+            name: "Fish Tank Decoration",
+            price: 19.99,
+            image: "OIP (13).jpg",
+            category: "fish"
+        },
+        {
+            id: 5,
+            name: "Rabbit Hay Feeder",
+            price: 24.99,
+            image: "OIP (15).jpg",
+            category: "rabbits"
+        }
+        ];
+
+        // Shopping cart state
+        let cart = [];
+        let cartCount = 0;
+
+        // DOM Elements
+        const cartIcon = document.getElementById('cart-icon');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const cartClose = document.getElementById('cart-close');
+        const cartItems = document.getElementById('cart-items');
+        const cartCountElement = document.querySelector('.cart-count');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const cartTotal = document.getElementById('cart-total');
+        const toastContainer = document.getElementById('toast-container');
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Category filter
+            const categories = document.querySelectorAll('.shop-category');
+            categories.forEach(category => {
+                category.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedCategory = category.dataset.category;
+                    filterProducts(selectedCategory);
+                });
+            });
+
+            // Add to cart buttons
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const productId = parseInt(button.dataset.id);
+                    addToCart(productId);
+                });
+            });
+        });
+
+        // Cart toggle
+        cartIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartSidebar.classList.add('active');
+        });
+
+        cartClose.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+        });
+
+        // Cart functions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCart();
+            showToast(`Added ${product.name} to cart!`, 'success');
+        }
+
+        function updateCart() {
+            // Update cart count
+            cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountElement.textContent = cartCount;
+
+            // Update cart items
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <div class="cart-item-price">$${item.price}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update totals
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            cartTotal.textContent = `$${subtotal.toFixed(2)}`;
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (!item) return;
+
+            item.quantity += change;
+            if (item.quantity <= 0) {
+                cart = cart.filter(item => item.id !== productId);
+            }
+
+            updateCart();
+        }
+
+        function filterProducts(category) {
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+
+            toastContainer.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+        function initNewsletterModal() {
+            const newsletterModal = document.getElementById('newsletter-modal');
+            const newsletterForm = document.getElementById('newsletter-form');
+
+            // Show newsletter modal after 5 seconds
+            setTimeout(() => {
+                newsletterModal.style.display = 'flex';
+            }, 5000);
+
+            // Close modal when clicking outside
+            newsletterModal.addEventListener('click', (e) => {
+                if (e.target === newsletterModal) {
+                    newsletterModal.style.display = 'none';
+                }
+            });
+
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const interests = Array.from(
+                    document.querySelectorAll('input[name="interests"]:checked')
+                ).map(el => el.value);
+
+                // In a real application, this would be sent to a backend
+                showToast(`Thanks for subscribing with ${email}!`, 'success');
+                newsletterModal.style.display = 'none';
+            });
+        }
+
+        // Enhanced Product Search
+        function initProductSearch() {
+            const searchInput = document.createElement('input');
+            searchInput.type = 'text';
+            searchInput.placeholder = 'Search products...';
+            searchInput.classList.add('form-input');
+            searchInput.style.margin = '1rem 0';
+            searchInput.style.width = '100%';
+
+            const productGrid = document.querySelector('.product-grid');
+            productGrid.parentNode.insertBefore(searchInput, productGrid);
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const productCards = document.querySelectorAll('.product-card');
+
+                productCards.forEach(card => {
+                    const productTitle = card.querySelector('.product-title').textContent.toLowerCase();
+                    const productCategory = card.querySelector('.product-category').textContent.toLowerCase();
+
+                    if (productTitle.includes(searchTerm) || productCategory.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Add Wishlist Functionality
+        function initWishlist() {
+            const wishlistButtons = document.querySelectorAll('.btn-outline');
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('wishlist-active');
+                    const productName = button.closest('.product-card').querySelector('.product-title').textContent;
+                    showToast(`${button.classList.contains('wishlist-active') ? 'Added' : 'Removed'} ${productName} from wishlist`, 'success');
+                });
+            });
+        }
+
+        // Initialize All Enhanced Features
+        document.addEventListener('DOMContentLoaded', () => {
+            initNewsletterModal();
+            initProductSearch();
+            initWishlist();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetPals - Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --background: #f3f4f6;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style-type: none;
+        }
+
+        .navbar-menu li {
+            margin-left: 1rem;
+        }
+
+        .navbar-menu a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-menu a:hover {
+            color: var(--primary);
+        }
+
+        .services-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .services-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .services-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            margin-bottom: 1.5rem;
+        }
+
+        .service-cta {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .service-cta:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .footer-links {
+            list-style-type: none;
+            display: flex;
+        }
+
+        .footer-links li {
+            margin-left: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-logo">PetPals</a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="services-hero">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">Our Services</h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">Providing top-notch care for your beloved pets</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="services-grid">
+            <div class="service-card animate__animated animate__fadeInUp">
+                <div class="service-icon"><i class="fas fa-paw"></i></div>
+                <h3 class="service-title">Pet Grooming</h3>
+                <p class="service-description">Keep your pet looking and feeling their best with our professional grooming services.</p>
+                <a href="#" class="service-cta">Book Now</a>
+            </div>
+            <div class="service-card animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="service-icon"><i class="fas fa-hospital"></i></div>
+                <h3 class="service-title">Veterinary Care</h3>
+                <p class="service-description">Expert medical care for your pets' health and well-being, provided by our experienced veterinarians.</p>
+                <a href="#" class="service-cta">Learn More</a>
+            </div>
+            <div class="service-card animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="service-icon"><i class="fas fa-home"></i></div>
+                <h3 class="service-title">Pet Boarding</h3>
+                <p class="service-description">Safe and comfortable boarding facilities for your pets when you're away.</p>
+                <a href="#" class="service-cta">Reserve Now</a>
+            </div>
+            <div class="service-card animate__animated animate__fadeInUp animate__delay-3s">
+                <div class="service-icon"><i class="fas fa-dog"></i></div>
+                <h3 class="service-title">Dog Training</h3>
+                <p class="service-description">Professional dog training services to help your furry friend become a well-behaved companion.</p>
+                <a href="#" class="service-cta">Enroll Now</a>
+            </div>
+            <div class="service-card animate__animated animate__fadeInUp animate__delay-4s">
+                <div class="service-icon"><i class="fas fa-walking"></i></div>
+                <h3 class="service-title">Pet Sitting & Walking</h3>
+                <p class="service-description">Reliable pet sitting and walking services to keep your pets happy and healthy when you're busy.</p>
+                <a href="#" class="service-cta">Schedule Service</a>
+            </div>
+            <div class="service-card animate__animated animate__fadeInUp animate__delay-5s">
+                <div class="service-icon"><i class="fas fa-birthday-cake"></i></div>
+                <h3 class="service-title">Pet Parties</h3>
+                <p class="service-description">Celebrate your pet's special day with our fun and memorable pet party services.</p>
+                <a href="#" class="service-cta">Plan a Party</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">PetPals</div>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add any JavaScript functionality here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Example: Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
